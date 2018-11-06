@@ -20,21 +20,76 @@ class ImagePostViewController: ShiftableViewController {
     }
     
     func updateViews() {
-        
-        guard let imageData = imageData,
-            let image = UIImage(data: imageData) else {
-                title = "New Post"
-                return
+        guard let originalImage = originalImage else {
+            title = "New Post"
+            return
         }
+        
         
         title = post?.title
         
-        setImageViewHeight(with: image.ratio)
+        setImageViewHeight(with: originalImage.ratio)
         
-        imageView.image = image
+        imageView.image = image(byFiltering: originalImage)
         
         chooseImageButton.setTitle("", for: [])
     }
+    
+    @IBAction func changeBrightness(_ sender: Any) {
+        updateViews()
+    }
+    
+    @IBAction func changeContrast(_ sender: Any) {
+        updateViews()
+    }
+    
+    @IBAction func changeSaturation(_ sender: Any) {
+        updateViews()
+    }
+    
+    @IBAction func changeHue(_ sender: Any) {
+        updateViews()
+    }
+    
+    @IBAction func changeExposure(_ sender: Any) {
+        updateViews()
+    }
+    
+    @IBOutlet weak var brightnessSlider: UISlider!
+    
+    @IBOutlet weak var contrastSlider: UISlider!
+    
+    @IBOutlet weak var saturationSlider: UISlider!
+    
+    @IBOutlet weak var hueSlider: UISlider!
+    
+    @IBOutlet weak var exposureSlider: UISlider!
+    
+    
+    private func image(byFiltering image: UIImage) -> UIImage {
+        guard let cgImage = image.cgImage else { return image }
+        let ciImage = CIImage(cgImage: cgImage)
+        
+        filter.setValue(ciImage, forKey: kCIInputImageKey)
+        filter.setValue(brightnessSlider.value, forKey: kCIInputBrightnessKey)
+        filter.setValue(contrastSlider.value, forKey: kCIInputContrastKey)
+        filter.setValue(saturationSlider.value, forKey: kCIInputSaturationKey)
+        filterTwo.setValue(filter.outputImage, forKey: kCIInputImageKey)
+        filterTwo.setValue(hueSlider.value, forKey: kCIInputAngleKey)
+        filterThree.setValue(filterTwo.outputImage, forKey: kCIInputImageKey)
+        filterThree.setValue(hueSlider.value, forKey: kCIInputEVKey)
+        guard let outputCIImage = filterTwo.outputImage else { return image }
+        
+        guard let outputCGImage = context.createCGImage(outputCIImage, from: outputCIImage.extent) else { return image }
+        
+        return UIImage(cgImage: outputCGImage)
+        
+    }
+    
+    private let filter = CIFilter(name: "CIColorControls")!
+    private let filterTwo = CIFilter(name: "CIHueAdjust")!
+    private let filterThree = CIFilter(name: "CIExposureAdjust")!
+    private let context = CIContext(options: nil)
     
     private func presentImagePickerController() {
         
@@ -111,7 +166,11 @@ class ImagePostViewController: ShiftableViewController {
         
         view.layoutSubviews()
     }
-    
+    var originalImage: UIImage? {
+        didSet {
+            updateViews()
+        }
+    }
     var postController: PostController!
     var post: Post?
     var imageData: Data?
@@ -133,7 +192,7 @@ extension ImagePostViewController: UIImagePickerControllerDelegate, UINavigation
         
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         
-        imageView.image = image
+        originalImage = image
         
         setImageViewHeight(with: image.ratio)
     }
