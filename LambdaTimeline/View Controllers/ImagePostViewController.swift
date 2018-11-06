@@ -13,7 +13,7 @@ class ImagePostViewController: ShiftableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        controlsStackView.isHidden = true
         setImageViewHeight(with: 1.0)
         
         updateViews()
@@ -65,6 +65,7 @@ class ImagePostViewController: ShiftableViewController {
     
     @IBOutlet weak var exposureSlider: UISlider!
     
+    @IBOutlet weak var controlsStackView: UIStackView!
     
     private func image(byFiltering image: UIImage) -> UIImage {
         guard let cgImage = image.cgImage else { return image }
@@ -168,6 +169,7 @@ class ImagePostViewController: ShiftableViewController {
     }
     var originalImage: UIImage? {
         didSet {
+            controlsStackView.isHidden = false
             updateViews()
         }
     }
