@@ -28,6 +28,24 @@ class ImagePostDetailTableViewController: UITableViewController {
         authorLabel.text = post.author.displayName
     }
     
+    @IBAction func presentOptions(_ sender: Any) {
+        let alert = UIAlertController(title: "Record or Write?", message: "Would you like to record or type a comment?", preferredStyle: .alert)
+        let addCommentAction = UIAlertAction(title: "Type Comment", style: .default) { (_) in
+            self.createComment(sender)
+        }
+        
+        let recordCommentAction = UIAlertAction(title: "Record Comment", style: .default) { (_) in
+            self.createComment(sender)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(recordCommentAction)
+        alert.addAction(addCommentAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: - Table view data source
     
     @IBAction func createComment(_ sender: Any) {

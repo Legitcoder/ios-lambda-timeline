@@ -78,7 +78,7 @@ class ImagePostViewController: ShiftableViewController {
         filterTwo.setValue(filter.outputImage, forKey: kCIInputImageKey)
         filterTwo.setValue(hueSlider.value, forKey: kCIInputAngleKey)
         filterThree.setValue(filterTwo.outputImage, forKey: kCIInputImageKey)
-        filterThree.setValue(hueSlider.value, forKey: kCIInputEVKey)
+        filterThree.setValue(exposureSlider.value, forKey: kCIInputEVKey)
         guard let outputCIImage = filterTwo.outputImage else { return image }
         
         guard let outputCGImage = context.createCGImage(outputCIImage, from: outputCIImage.extent) else { return image }

@@ -429,9 +429,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="ZF5-WY-6Y2">
-                        <barButtonItem key="rightBarButtonItem" title="Comment" id="xrT-JD-ey3">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="xrT-JD-ey3">
                             <connections>
-                                <action selector="createComment:" destination="OyM-8q-Icp" id="2IY-cQ-DLq"/>
+                                <action selector="presentOptions:" destination="OyM-8q-Icp" id="Jps-Rh-8ZC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
