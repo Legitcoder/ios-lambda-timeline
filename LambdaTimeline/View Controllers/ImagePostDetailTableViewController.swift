@@ -35,7 +35,9 @@ class ImagePostDetailTableViewController: UITableViewController {
         }
         
         let recordCommentAction = UIAlertAction(title: "Record Comment", style: .default) { (_) in
-            self.createComment(sender)
+//            let newRecordingVC = self.storyboard?.instantiateViewController(withIdentifier: "NewRecordingViewController") as! NewRecordingViewController
+//            self.present(newRecordingVC, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "NewRecording", sender: sender)
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -45,6 +47,15 @@ class ImagePostDetailTableViewController: UITableViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "NewRecording" {
+            guard let destination = segue.destination as? NewRecordingViewController else { return }
+            destination.postController = postController
+            destination.post = post
+        }
+    }
+    
     
     // MARK: - Table view data source
     
@@ -63,7 +74,7 @@ class ImagePostDetailTableViewController: UITableViewController {
             
             guard let commentText = commentTextField?.text else { return }
             
-            self.postController.addComment(with: commentText, to: &self.post!)
+            self.postController.addComment(text: commentText, to: &self.post!)
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()

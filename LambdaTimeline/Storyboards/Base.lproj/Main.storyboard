@@ -290,6 +290,43 @@
             </objects>
             <point key="canvasLocation" x="1968.8" y="-195.6521739130435"/>
         </scene>
+        <!--New Recording View Controller-->
+        <scene sceneID="MZO-LN-GFa">
+            <objects>
+                <viewController storyboardIdentifier="NewRecordingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jQ6-8O-8wq" customClass="NewRecordingViewController" customModule="LambdaTimeline" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Xm-sZ-zbf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGM-a7-L5o">
+                                <rect key="frame" x="161" y="200" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Record"/>
+                                <connections>
+                                    <action selector="record:" destination="jQ6-8O-8wq" eventType="touchUpInside" id="BSS-f7-mdg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eEc-Fk-7gh">
+                                <rect key="frame" x="163" y="407" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="save:" destination="jQ6-8O-8wq" eventType="touchUpInside" id="dU2-wR-T2P"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="kck-dm-EiG"/>
+                    </view>
+                    <connections>
+                        <outlet property="recordButton" destination="nGM-a7-L5o" id="LRx-ju-Ysj"/>
+                        <outlet property="saveButton" destination="eEc-Fk-7gh" id="pRE-SW-ebK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SXk-zk-91s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2916" y="91"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="gdW-Je-ais">
             <objects>
@@ -431,7 +468,7 @@
                     <navigationItem key="navigationItem" title="Title" id="ZF5-WY-6Y2">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xrT-JD-ey3">
                             <connections>
-                                <action selector="presentOptions:" destination="OyM-8q-Icp" id="Jps-Rh-8ZC"/>
+                                <action selector="presentOptions:" destination="OyM-8q-Icp" id="dI6-JK-SdS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -440,6 +477,7 @@
                         <outlet property="imageView" destination="Q0L-w5-qUw" id="0v7-ZB-mgi"/>
                         <outlet property="imageViewAspectRatioConstraint" destination="y1B-iX-x3e" id="wIt-kh-Tzd"/>
                         <outlet property="titleLabel" destination="jyy-BX-c2c" id="UEd-xO-ipC"/>
+                        <segue destination="jQ6-8O-8wq" kind="show" identifier="NewRecording" id="5ig-O7-R5M"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CdL-Y3-4ej" userLabel="First Responder" sceneMemberID="firstResponder"/>

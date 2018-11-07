@@ -12,7 +12,7 @@ import FirebaseDatabase
 import FirebaseStorage
 
 class PostController {
-    
+
     func createPost(with title: String, ofType mediaType: MediaType, mediaData: Data, ratio: CGFloat? = nil, completion: @escaping (Bool) -> Void = { _ in }) {
         
         guard let currentUser = Auth.auth().currentUser,
@@ -35,12 +35,20 @@ class PostController {
         }
     }
     
-    func addComment(with text: String, to post: inout Post) {
-        
+    
+    func addComment(text: String? = nil, audioURL: URL? = nil, to post: inout Post) {
         guard let currentUser = Auth.auth().currentUser,
             let author = Author(user: currentUser) else { return }
-        
-        let comment = Comment(text: text, author: author)
+        var comment: Comment
+        if let newComment = text {
+            comment = Comment(text: newComment, author: author)
+        } else {
+            comment = Comment(audioURL: audioURL, author: author)
+            let audioData = try! Data(contentsOf: audioURL!)
+            store(mediaData: audioData, mediaType: MediaType.audio) { (mediaURL) in
+                
+            }
+        }
         post.comments.append(comment)
         
         savePostToFirebase(post)
@@ -80,7 +88,6 @@ class PostController {
     }
 
     private func store(mediaData: Data, mediaType: MediaType, completion: @escaping (URL?) -> Void) {
-        
         let mediaID = UUID().uuidString
         
         let mediaRef = storageRef.child(mediaType.rawValue).child(mediaID)
