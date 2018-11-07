@@ -31,7 +31,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         recordingOutput = fileOutput
         self.captureSession = captureSession
-        //previewView.videoPreviewLayer.session = captureSession
+        previewView.videoPreviewLayer.session = captureSession
         
     }
     
@@ -114,10 +114,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     }
     
     
-    
-    //@IBOutlet weak var previewView: CameraPreviewView!
-    
-    
+    var postController: PostController?
+    @IBOutlet weak var previewView: CameraPreviewView!
     @IBOutlet weak var recordButton: UIButton!
     
 }
