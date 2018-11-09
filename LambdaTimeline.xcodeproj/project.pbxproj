@@ -31,6 +31,9 @@
 		46D571F82173FC2700E7FF73 /* ImagePostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D571F72173FC2700E7FF73 /* ImagePostDetailTableViewController.swift */; };
 		A111C46921950678006A6D9C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A111C46821950678006A6D9C /* GoogleService-Info.plist */; };
 		A111C46D21952118006A6D9C /* Post+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111C46C21952118006A6D9C /* Post+Mapping.swift */; };
+		A1B25DF4219529850087A06A /* LocationManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B25DF3219529850087A06A /* LocationManagerHelper.swift */; };
+		A1B25DF6219531ED0087A06A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B25DF5219531ED0087A06A /* TabBarViewController.swift */; };
+		A1B25DF82195381D0087A06A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B25DF72195381D0087A06A /* MapViewController.swift */; };
 		E453457955DF907FCBD117F1 /* Pods_LambdaTimeline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA39CACB677861CF84322FB5 /* Pods_LambdaTimeline.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +66,9 @@
 		5D2CCD6C68779B0A70AC37FA /* Pods-LambdaTimeline.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LambdaTimeline.release.xcconfig"; path = "Pods/Target Support Files/Pods-LambdaTimeline/Pods-LambdaTimeline.release.xcconfig"; sourceTree = "<group>"; };
 		A111C46821950678006A6D9C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A111C46C21952118006A6D9C /* Post+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+Mapping.swift"; sourceTree = "<group>"; };
+		A1B25DF3219529850087A06A /* LocationManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerHelper.swift; sourceTree = "<group>"; };
+		A1B25DF5219531ED0087A06A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		A1B25DF72195381D0087A06A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		AA39CACB677861CF84322FB5 /* Pods_LambdaTimeline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LambdaTimeline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -161,6 +167,8 @@
 		46A0366B21700F6100E7FF73 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A1B25DF72195381D0087A06A /* MapViewController.swift */,
+				A1B25DF5219531ED0087A06A /* TabBarViewController.swift */,
 				46A0366C2170158900E7FF73 /* SignInViewController.swift */,
 				46A0366921700F5100E7FF73 /* PostsCollectionViewController.swift */,
 				46CFE6F421707D0000E7FF73 /* ImagePostViewController.swift */,
@@ -195,6 +203,7 @@
 				464637982170048900E7FF73 /* FirebaseConvertible.swift */,
 				46CFE6FC217154F500E7FF73 /* Networking.swift */,
 				46CFE6F82170862C00E7FF73 /* ShiftableViewController.swift */,
+				A1B25DF3219529850087A06A /* LocationManagerHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -377,15 +386,18 @@
 			files = (
 				46A0366D2170158900E7FF73 /* SignInViewController.swift in Sources */,
 				46CFE6FB21714E6100E7FF73 /* Author.swift in Sources */,
+				A1B25DF6219531ED0087A06A /* TabBarViewController.swift in Sources */,
 				46CFE6F92170862C00E7FF73 /* ShiftableViewController.swift in Sources */,
 				4646377C216FDE4B00E7FF73 /* AppDelegate.swift in Sources */,
 				46CFE6FD217154F500E7FF73 /* Networking.swift in Sources */,
 				46CFE6F521707D0000E7FF73 /* ImagePostViewController.swift in Sources */,
 				46CFE6FF2171556D00E7FF73 /* ConcurrentOperation.swift in Sources */,
 				46463790216FFD1B00E7FF73 /* Post.swift in Sources */,
+				A1B25DF82195381D0087A06A /* MapViewController.swift in Sources */,
 				46CFE6F32170757F00E7FF73 /* User+DictionaryRepresentation.swift in Sources */,
 				46D571F32172D43B00E7FF73 /* Cache.swift in Sources */,
 				46CFE7012171559500E7FF73 /* FetchMediaOperation.swift in Sources */,
+				A1B25DF4219529850087A06A /* LocationManagerHelper.swift in Sources */,
 				46D571F82173FC2700E7FF73 /* ImagePostDetailTableViewController.swift in Sources */,
 				46CFE7032171572600E7FF73 /* ImagePostCollectionViewCell.swift in Sources */,
 				4646379C2170091A00E7FF73 /* PostController.swift in Sources */,

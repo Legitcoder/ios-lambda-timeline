@@ -11,7 +11,6 @@ import MapKit
 
 extension Post: MKAnnotation {
     
-    
     var coordinate: CLLocationCoordinate2D {
         guard let geotag = geotag else { return kCLLocationCoordinate2DInvalid }
         return geotag

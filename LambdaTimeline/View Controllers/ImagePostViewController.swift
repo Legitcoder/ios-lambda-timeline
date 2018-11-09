@@ -17,6 +17,8 @@ class ImagePostViewController: ShiftableViewController {
         setImageViewHeight(with: 1.0)
         
         updateViews()
+        
+        locationManagerHelper.requestLocationAuthorization()
     }
     
     func updateViews() {
@@ -55,14 +57,14 @@ class ImagePostViewController: ShiftableViewController {
     @IBAction func createPost(_ sender: Any) {
         
         view.endEditing(true)
-        
+        let coordinate = locationManagerHelper.getCurrentLocation()?.coordinate
         guard let imageData = imageView.image?.jpegData(compressionQuality: 0.1),
             let title = titleTextField.text, title != "" else {
             presentInformationalAlertController(title: "Uh-oh", message: "Make sure that you add a photo and a caption before posting.")
             return
         }
         
-        postController.createPost(with: title, ofType: .image, mediaData: imageData, ratio: imageView.image?.ratio) { (success) in
+        postController.createPost(with: title, geotag: coordinate, ofType: .image, mediaData: imageData, ratio: imageView.image?.ratio) { (success) in
             guard success else {
                 DispatchQueue.main.async {
                     self.presentInformationalAlertController(title: "Error", message: "Unable to create post. Try again.")
@@ -115,6 +117,7 @@ class ImagePostViewController: ShiftableViewController {
     var postController: PostController!
     var post: Post?
     var imageData: Data?
+    let locationManagerHelper = LocationManagerHelper()
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
