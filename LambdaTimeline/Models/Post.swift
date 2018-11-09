@@ -8,17 +8,18 @@
 
 import Foundation
 import FirebaseAuth
-
+import MapKit
 enum MediaType: String {
     case image
 }
 
-struct Post {
+class Post: NSObject {
     
-    init(title: String, mediaURL: URL, ratio: CGFloat? = nil, author: Author, timestamp: Date = Date()) {
+    init(title: String, mediaURL: URL, geotag: CLLocationCoordinate2D? = nil, ratio: CGFloat? = nil, author: Author, timestamp: Date = Date()) {
         self.mediaURL = mediaURL
         self.ratio = ratio
         self.mediaType = .image
+        self.geotag = geotag
         self.author = author
         self.comments = [Comment(text: title, author: author)]
         self.timestamp = timestamp
@@ -32,8 +33,12 @@ struct Post {
             let authorDictionary = dictionary[Post.authorKey] as? [String: Any],
             let author = Author(dictionary: authorDictionary),
             let timestampTimeInterval = dictionary[Post.timestampKey] as? TimeInterval,
-            let captionDictionaries = dictionary[Post.commentsKey] as? [[String: Any]] else { return nil }
+            let captionDictionaries = dictionary[Post.commentsKey] as? [[String: Any]],
+            let longitude = dictionary[Post.longitudeKey] as? Double,
+            let latitude = dictionary[Post.latitudeKey] as? Double else { return nil }
         
+        
+        self.geotag = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         self.mediaURL = mediaURL
         self.mediaType = mediaType
         self.ratio = dictionary[Post.ratioKey] as? CGFloat
@@ -48,7 +53,11 @@ struct Post {
                 Post.mediaTypeKey: mediaType.rawValue,
                 Post.commentsKey: comments.map({ $0.dictionaryRepresentation }),
                 Post.authorKey: author.dictionaryRepresentation,
-                Post.timestampKey: timestamp.timeIntervalSince1970]
+                Post.timestampKey: timestamp.timeIntervalSince1970,
+                Post.longitudeKey: geotag?.longitude,
+                Post.latitudeKey: geotag?.latitude]
+        
+        
         
         guard let ratio = self.ratio else { return dict }
         
@@ -64,11 +73,13 @@ struct Post {
     var comments: [Comment]
     var id: String?
     var ratio: CGFloat?
+    var geotag: CLLocationCoordinate2D?
     
     var title: String? {
         return comments.first?.text
     }
-    
+    static private let longitudeKey = "longitude"
+    static private let latitudeKey = "latitude"
     static private let mediaKey = "media"
     static private let ratioKey = "ratio"
     static private let mediaTypeKey = "mediaType"
